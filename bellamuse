@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bellamuse | Mousses artesanais</title>
+<meta name="description" content="Bellamuse: mousses artesanais de maracujá, limão e chocolate, feitas em pequenos lotes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --creme:#FFF9E6; --manteiga:#FFF0B3; --limao:#FFE066; --ouro:#C8931E; --ouro-escuro:#8A5F0B;
+  --cacau:#4A3520; --branco:#FFFFFF; --maracuja:#F7CB45; --verde:#E4EC8A; --choc:#B98B63;
+  --titulo:"Fraunces",Georgia,serif; --texto:"Nunito Sans",system-ui,sans-serif;
+  --raio:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--texto);color:var(--cacau);background:var(--creme);line-height:1.65;font-size:1.05rem}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ouro);outline-offset:3px}
+.wrap{width:min(1120px,92%);margin-inline:auto}
+section{padding:5.5rem 0}
+h1,h2,h3{font-family:var(--titulo);line-height:1.15;font-weight:700}
+h2{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:1rem}
+.lead{max-width:56ch;opacity:.85}
+
+/* Botões */
+.btn{display:inline-block;padding:.85rem 1.7rem;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--cacau);background:var(--cacau);color:var(--creme);cursor:pointer;font:inherit;font-weight:700;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px);background:var(--ouro-escuro);border-color:var(--ouro-escuro)}
+.btn.claro{background:transparent;color:var(--cacau)}
+.btn.claro:hover{background:var(--limao);color:var(--cacau);border-color:var(--cacau)}
+.btn.ouro{background:var(--ouro);border-color:var(--ouro);color:var(--branco)}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,249,230,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(200,147,30,.25)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:var(--titulo);font-size:1.7rem;font-weight:700;text-decoration:none;letter-spacing:-.01em}
+.logo span{color:var(--ouro)}
+nav ul{display:flex;gap:2rem;list-style:none;align-items:center}
+nav a{text-decoration:none;font-weight:600}
+nav a:hover{color:var(--ouro-escuro)}
+.menu-btn{display:none;background:none;border:2px solid var(--cacau);border-radius:12px;padding:.4rem .8rem;font:inherit;font-weight:700;color:var(--cacau);cursor:pointer}
+
+/* Espaço para imagem */
+.slot{position:relative;overflow:hidden;background:linear-gradient(145deg,var(--manteiga),var(--limao));display:grid;place-items:center;text-align:center;color:var(--ouro-escuro);font-size:.9rem;font-weight:600}
+.slot svg{width:64px;height:64px;margin:0 auto .4rem;opacity:.7}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot small{display:block;font-weight:400;opacity:.8}
+
+/* Hero */
+.hero{padding:4rem 0 6rem;background:radial-gradient(circle at 85% 20%,var(--manteiga) 0,transparent 55%)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.5vw,4.8rem);letter-spacing:-.02em;margin-bottom:1.2rem}
+.hero p{max-width:46ch;margin-bottom:2rem;font-size:1.15rem}
+.hero .acoes{display:flex;gap:1rem;flex-wrap:wrap}
+.hero .slot{aspect-ratio:4/5;border-radius:999px 999px var(--raio) var(--raio);border:6px solid var(--branco);box-shadow:0 20px 50px rgba(200,147,30,.3)}
+.selo{display:inline-block;background:var(--branco);border:1.5px solid var(--ouro);color:var(--ouro-escuro);padding:.3rem 1rem;border-radius:999px;font-size:.9rem;font-weight:700;margin-bottom:1.2rem}
+
+/* Sobre */
+.sobre{background:var(--branco)}
+.sobre .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:3.5rem;align-items:center}
+.sobre .slot{aspect-ratio:1;border-radius:var(--raio) 999px var(--raio) var(--raio)}
+.sobre p+p{margin-top:1rem}
+.valores{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
+.valores li{list-style:none;background:var(--manteiga);padding:.4rem 1rem;border-radius:999px;font-weight:600;font-size:.95rem}
+
+/* Produtos */
+.produtos .topo{text-align:center;margin-bottom:3rem}
+.produtos .lead{margin-inline:auto}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+.card{background:var(--branco);border-radius:var(--raio);overflow:hidden;border:1.5px solid rgba(200,147,30,.3);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(200,147,30,.25)}
+.card .slot{aspect-ratio:4/3;border-radius:0}
+.card.maracuja .slot{background:linear-gradient(145deg,#FFE9A0,var(--maracuja))}
+.card.limao .slot{background:linear-gradient(145deg,#F4F7B8,var(--verde))}
+.card.chocolate .slot{background:linear-gradient(145deg,#F0D9C0,var(--choc));color:#fff}
+.card .info{padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+.card h3{font-size:1.5rem}
+.card p{font-size:.97rem;opacity:.85;flex:1}
+.preco{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem}
+.preco strong{font-family:var(--titulo);font-size:1.8rem;color:var(--ouro-escuro)}
+
+/* Galeria */
+.galeria{background:var(--manteiga)}
+.galeria .topo{margin-bottom:2.5rem}
+.grade{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:1rem}
+.grade .slot{border-radius:20px;border:4px solid var(--branco)}
+.grade .g1{grid-column:span 2;grid-row:span 2}
+.grade .g4{grid-row:span 2}
+.grade .g5{grid-column:span 2}
+
+/* Folder */
+.folder .topo{text-align:center;margin-bottom:2.5rem}
+.folder .lead{margin-inline:auto}
+.dobras{display:grid;grid-template-columns:repeat(3,1fr);background:var(--branco);border-radius:var(--raio);box-shadow:0 25px 60px rgba(138,95,11,.2);overflow:hidden;border:1.5px solid var(--ouro)}
+.painel{padding:2.4rem 2rem;position:relative;display:flex;flex-direction:column;gap:1rem}
+.painel+.painel{border-left:2px dashed rgba(200,147,30,.55)}
+.painel.capa{background:linear-gradient(160deg,var(--limao),var(--manteiga));text-align:center;justify-content:center;align-items:center}
+.painel.capa .logo{font-size:2.4rem}
+.painel.capa .slot{width:100%;aspect-ratio:1;border-radius:50%;border:5px solid var(--branco)}
+.painel h3{font-size:1.6rem}
+.menu-folder{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.menu-folder li{display:flex;align-items:baseline;gap:.5rem}
+.menu-folder li::after{content:"";order:2;flex:1;border-bottom:2px dotted var(--ouro);transform:translateY(-4px)}
+.menu-folder b{order:1}
+.menu-folder span{order:3;font-weight:700;color:var(--ouro-escuro)}
+.promo{background:var(--manteiga);border-radius:18px;padding:1rem 1.2rem;font-weight:600}
+.passos{padding-left:1.2rem;display:flex;flex-direction:column;gap:.6rem}
+
+/* Contato */
+.contato{background:var(--branco)}
+.contato .wrap{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.contatos{margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+form{background:var(--creme);border:1.5px solid rgba(200,147,30,.35);border-radius:var(--raio);padding:2rem;display:grid;gap:1rem}
+label{font-weight:700;font-size:.95rem;display:grid;gap:.3rem}
+input,select,textarea{font:inherit;padding:.75rem 1rem;border-radius:14px;border:1.5px solid rgba(74,53,32,.3);background:var(--branco);color:var(--cacau);width:100%}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--limao);border-color:var(--ouro)}
+.qtds{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.qtds label{font-weight:600;font-size:.88rem}
+
+/* Footer */
+footer{background:var(--cacau);color:var(--creme);padding:3rem 0 2rem}
+footer .wrap{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+footer .logo{color:var(--limao)}
+footer ul{list-style:none;display:grid;gap:.3rem;font-size:.95rem}
+.copy{margin-top:2rem;padding-top:1.2rem;border-top:1px solid rgba(255,249,230,.2);font-size:.85rem;opacity:.75;width:100%}
+
+/* Animação de entrada única no hero */
+@media (prefers-reduced-motion:no-preference){
+  .hero .slot{animation:subir 1s ease-out both}
+  @keyframes subir{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+}
+
+/* Responsivo */
+@media (max-width:900px){
+  section{padding:4rem 0}
+  .hero .wrap,.sobre .wrap,.contato .wrap{grid-template-columns:1fr}
+  .hero .slot{max-width:380px;margin-inline:auto;width:100%}
+  .sobre .slot{max-width:380px;width:100%}
+  .cards{grid-template-columns:1fr}
+  .grade{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .grade .g1{grid-column:span 2}
+  .grade .g5{grid-column:span 2}
+  .dobras{grid-template-columns:1fr}
+  .painel+.painel{border-left:0;border-top:2px dashed rgba(200,147,30,.55)}
+  .menu-btn{display:block}
+  nav ul{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;background:var(--creme);border-bottom:1px solid rgba(200,147,30,.3);padding:.5rem 0}
+  nav ul.aberto{display:flex}
+  nav li{width:100%;text-align:center}
+  nav a{display:block;padding:.9rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="#inicio" class="logo">Bella<span>muse</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav aria-label="Principal">
+      <ul id="menu">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#folder">Folder</a></li>
+        <li><a class="btn ouro" href="#contato">Fazer pedido</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <span class="selo">Feito à mão, em pequenos lotes</span>
+      <h1>Um potinho de doçura para adoçar o seu dia.</h1>
+      <p>Mousses artesanais cremosas, leves e feitas com ingredientes de verdade. Escolha seu sabor favorito e peça pelo WhatsApp.</p>
+      <div class="acoes">
+        <a class="btn" href="#produtos">Ver sabores</a>
+        <a class="btn claro" href="#contato">Fazer pedido</a>
+      </div>
+    </div>
+    <!-- IMAGEM DO HERO: coloque uma foto vertical (ex.: imagens/hero.jpg). Troque o conteúdo do slot por: <img src="imagens/hero.jpg" alt="Mousses Bellamuse"> -->
+    <div class="slot" role="img" aria-label="Espaço para foto principal">
+      <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18h36l-4 30a6 6 0 0 1-6 5H24a6 6 0 0 1-6-5z"/><path d="M16 26c5 5 11-3 16 0s11-3 16 0"/></svg>
+      Foto principal<small>imagens/hero.jpg</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE ============ -->
+<section class="sobre" id="sobre">
+  <div class="wrap">
+    <!-- IMAGEM SOBRE: foto da cozinha, das mãos preparando ou da fundadora -->
+    <div class="slot" role="img" aria-label="Espaço para foto da nossa história">
+      <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="14" width="48" height="36" rx="6"/><circle cx="24" cy="28" r="5"/><path d="M8 42l14-10 10 8 8-6 16 12"/></svg>
+      Foto da nossa história<small>imagens/sobre.jpg</small></div>
+    </div>
+    <div>
+      <h2>Nascemos na cozinha de casa.</h2>
+      <p class="lead">A Bellamuse começou com uma receita de família e um pedido simples dos amigos: "faz mais um potinho?". Do que era uma sobremesa de domingo virou um pequeno negócio.</p>
+      <p class="lead">Hoje cada mousse é batida e montada à mão, em pequenos lotes, para chegar fresca e cremosa até você. Sem pressa, sem exagero e com muito carinho em cada colherada.</p>
+      <ul class="valores">
+        <li>Artesanal</li><li>Ingredientes frescos</li><li>Feito com carinho</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUTOS ============ -->
+<section class="produtos" id="produtos">
+  <div class="wrap">
+    <div class="topo">
+      <h2>Nossos sabores</h2>
+      <p class="lead">Três clássicos que todo mundo ama, em porções individuais.</p>
+    </div>
+    <div class="cards">
+
+      <article class="card maracuja">
+        <!-- IMAGEM: imagens/maracuja.jpg -->
+        <div class="slot" role="img" aria-label="Espaço para foto da mousse de maracujá">
+          <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18h36l-4 30a6 6 0 0 1-6 5H24a6 6 0 0 1-6-5z"/><path d="M16 26c5 5 11-3 16 0s11-3 16 0"/></svg>
+          Foto da mousse<small>imagens/maracuja.jpg</small></div>
+        </div>
+        <div class="info">
+          <h3>Mousse de Maracujá</h3>
+          <p>Cremosa, com o azedinho na medida certa e sementinhas crocantes por cima.</p>
+          <div class="preco"><strong>R$ 5,00</strong><a class="btn" href="#contato" data-sabor="Maracujá">Pedir</a></div>
+        </div>
+      </article>
+
+      <article class="card limao">
+        <!-- IMAGEM: imagens/limao.jpg -->
+        <div class="slot" role="img" aria-label="Espaço para foto da mousse de limão">
+          <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18h36l-4 30a6 6 0 0 1-6 5H24a6 6 0 0 1-6-5z"/><path d="M16 26c5 5 11-3 16 0s11-3 16 0"/></svg>
+          Foto da mousse<small>imagens/limao.jpg</small></div>
+        </div>
+        <div class="info">
+          <h3>Mousse de Limão</h3>
+          <p>Leve e refrescante, com raspas de limão para um final bem fresquinho.</p>
+          <div class="preco"><strong>R$ 5,00</strong><a class="btn" href="#contato" data-sabor="Limão">Pedir</a></div>
+        </div>
+      </article>
+
+      <article class="card chocolate">
+        <!-- IMAGEM: imagens/chocolate.jpg -->
+        <div class="slot" role="img" aria-label="Espaço para foto da mousse de chocolate">
+          <div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18h36l-4 30a6 6 0 0 1-6 5H24a6 6 0 0 1-6-5z"/><path d="M16 26c5 5 11-3 16 0s11-3 16 0"/></svg>
+          Foto da mousse<small>imagens/chocolate.jpg</small></div>
+        </div>
+        <div class="info">
+          <h3>Mousse de Chocolate</h3>
+          <p>Aerada e intensa, para quem não abre mão de um bom chocolate.</p>
+          <div class="preco"><strong>R$ 6,00</strong><a class="btn" href="#contato" data-sabor="Chocolate">Pedir</a></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERIA ============ -->
+<section class="galeria" id="galeria">
+  <div class="wrap">
+    <div class="topo">
+      <h2>Um pouco do nosso dia a dia</h2>
+      <p class="lead">Bastidores, potinhos prontos e momentos doces. Substitua os espaços abaixo pelas suas fotos.</p>
+    </div>
+    <div class="grade">
+      <!-- Cada .slot aceita: <img src="imagens/galeria1.jpg" alt="descrição"> -->
+      <div class="slot g1" role="img" aria-label="Foto 1">Foto 1<small>imagens/galeria1.jpg</small></div>
+      <div class="slot g2" role="img" aria-label="Foto 2">Foto 2<small>imagens/galeria2.jpg</small></div>
+      <div class="slot g3" role="img" aria-label="Foto 3">Foto 3<small>imagens/galeria3.jpg</small></div>
+      <div class="slot g4" role="img" aria-label="Foto 4">Foto 4<small>imagens/galeria4.jpg</small></div>
+      <div class="slot g5" role="img" aria-label="Foto 5">Foto 5<small>imagens/galeria5.jpg</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOLDER DIGITAL ============ -->
+<section class="folder" id="folder">
+  <div class="wrap">
+    <div class="topo">
+      <h2>Nosso folder</h2>
+      <p class="lead">Veja, salve e compartilhe nosso cardápio com quem você ama.</p>
+    </div>
+    <div class="dobras">
+      <div class="painel capa">
+        <a class="logo" href="#inicio">Bella<span>muse</span></a>
+        <p>Mousses artesanais<br>feitas com carinho</p>
+        <!-- IMAGEM DA CAPA DO FOLDER: imagens/folder.jpg -->
+        <div class="slot" role="img" aria-label="Espaço para foto do folder">Foto do folder<small>imagens/folder.jpg</small></div>
+      </div>
+      <div class="painel">
+        <h3>Cardápio</h3>
+        <ul class="menu-folder">
+          <li><b>Mousse de Maracujá</b><span>R$ 5,00</span></li>
+          <li><b>Mousse de Limão</b><span>R$ 5,00</span></li>
+          <li><b>Mousse de Chocolate</b><span>R$ 6,00</span></li>
+        </ul>
+        <p class="promo">Peça os três sabores e monte seu trio de potinhos.</p>
+      </div>
+      <div class="painel">
+        <h3>Como pedir</h3>
+        <ol class="passos">
+          <li>Escolha seus sabores.</li>
+          <li>Chame a gente no WhatsApp ou preencha o formulário.</li>
+          <li>Combine a retirada ou entrega e receba sua mousse fresquinha.</li>
+        </ol>
+        <a class="btn ouro" href="#contato">Fazer pedido</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATO / PEDIDOS ============ -->
+<section class="contato" id="contato">
+  <div class="wrap">
+    <div>
+      <h2>Faça seu pedido</h2>
+      <p class="lead">Preencha o formulário e o pedido segue pronto para o nosso WhatsApp. Se preferir, chame direto.</p>
+      <div class="contatos">
+        <!-- TROQUE o número abaixo (formato: 55 + DDD + número) -->
+        <a class="btn ouro" id="zapDireto" href="https://wa.me/5541999999999" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <p>Instagram: @bellamuse<br>Atendimento: todos os dias, das 9h às 18h</p>
+      </div>
+    </div>
+
+    <form id="pedido">
+      <label>Seu nome
+        <input type="text" id="nome" required autocomplete="name" placeholder="Como podemos te chamar?">
+      </label>
+      <fieldset style="border:0">
+        <legend style="font-weight:700;font-size:.95rem;margin-bottom:.3rem">Quantidade de cada sabor</legend>
+        <div class="qtds">
+          <label>Maracujá <input type="number" id="q-Maracujá" min="0" value="0"></label>
+          <label>Limão <input type="number" id="q-Limão" min="0" value="0"></label>
+          <label>Chocolate <input type="number" id="q-Chocolate" min="0" value="0"></label>
+        </div>
+      </fieldset>
+      <label>Retirada ou entrega?
+        <select id="entrega">
+          <option>Retirada</option>
+          <option>Entrega</option>
+        </select>
+      </label>
+      <label>Observações
+        <textarea id="obs" rows="3" placeholder="Endereço, horário, recado..."></textarea>
+      </label>
+      <button class="btn" type="submit">Enviar pedido pelo WhatsApp</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#inicio">Bellamuse</a>
+      <p>Mousses artesanais feitas com carinho.</p>
+    </div>
+    <ul>
+      <li>WhatsApp: (41) 99999-9999</li>
+      <li>Instagram: @bellamuse</li>
+      <li>Todos os dias, das 9h às 18h</li>
+    </ul>
+    <p class="copy">© 2026 Bellamuse. Projeto desenvolvido para a disciplina de Empreendedorismo.</p>
+  </div>
+</footer>
+
+<script>
+  // TROQUE AQUI pelo número do WhatsApp da Bellamuse (55 + DDD + número, só dígitos)
+  const WHATSAPP = "5541999999999";
+  const PRECOS = {"Maracujá":5, "Limão":5, "Chocolate":6};
+
+  // Menu no celular
+  const btn = document.getElementById("menuBtn"), menu = document.getElementById("menu");
+  btn.addEventListener("click", () => {
+    const aberto = menu.classList.toggle("aberto");
+    btn.setAttribute("aria-expanded", aberto);
+  });
+  menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.classList.remove("aberto"); btn.setAttribute("aria-expanded", false); } });
+
+  // Botão "Pedir" nos cards soma 1 unidade no formulário
+  document.querySelectorAll("[data-sabor]").forEach(a => {
+    a.addEventListener("click", () => {
+      const campo = document.getElementById("q-" + a.dataset.sabor);
+      campo.value = Number(campo.value) + 1;
+    });
+  });
+
+  // Envio do pedido para o WhatsApp
+  document.getElementById("pedido").addEventListener("submit", e => {
+    e.preventDefault();
+    let total = 0, itens = [];
+    for (const s in PRECOS) {
+      const q = Number(document.getElementById("q-" + s).value);
+      if (q > 0) { itens.push(`${q}x Mousse de ${s}`); total += q * PRECOS[s]; }
+    }
+    if (!itens.length) { alert("Escolha a quantidade de pelo menos um sabor."); return; }
+    const msg = `Olá, Bellamuse! Meu nome é ${document.getElementById("nome").value}.\n\nQuero pedir:\n${itens.join("\n")}\n\nTotal: R$ ${total.toFixed(2).replace(".", ",")}\n${document.getElementById("entrega").value}\nObs.: ${document.getElementById("obs").value || "nenhuma"}`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+  });
+  document.getElementById("zapDireto").href = `https://wa.me/${WHATSAPP}`;
+</script>
+</body>
+</html>
